@@ -104,19 +104,27 @@ Data convert_int_to_data(int number, unsigned char base, unsigned char number_bi
         return new_data;
     }
 
+    unsigned int mask;
     unsigned int uint_value;
     if (number < 0) {
         //uint_value = (1u << number_bits) + number;
         //uint_value = (unsigned int)(number & ((1u << number_bits) - 1));
-        unsigned int mask = (number_bits == 32) ? 0xFFFFFFFFu : ((1u << number_bits) - 1);
+        mask = (number_bits == 32) ? 0xFFFFFFFFu : ((1u << number_bits) - 1);
         uint_value = (unsigned int)(number & mask);
     } else {
-        uint_value = number;
+        uint_value = (unsigned int)number;
+    }
+
+    int max_digits = 1;
+    unsigned int temp = mask;
+    while (temp >= base) {
+        temp /= base;
+        max_digits++;
     }
 
     DataNode* head = NULL;
     int data_len = 0;
-    while (uint_value > 0 && data_len < number_bits) {
+    while (uint_value > 0 && data_len < max_digits) {
         unsigned int remainder = uint_value % base;
         DataNode* newNode = createNode(convertNumberToChar(remainder));
 
