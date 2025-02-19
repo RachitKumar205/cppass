@@ -94,7 +94,7 @@ Data convert_int_to_data(int number, unsigned char base, unsigned char number_bi
     Data new_data;
     new_data.base = base;
     new_data.number_bits = number_bits;
-    new_data.sign = (number < 0) ? 1 : 0;
+    new_data.sign = 1;
     new_data.data = NULL;
     new_data.len = 0;
 
