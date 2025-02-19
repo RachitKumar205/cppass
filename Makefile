@@ -7,8 +7,10 @@ APPBIN = data_app
 TESTBIN = data_test
 
 IDIR = include
-CC = g++
-CFLAGS = -I$(IDIR) -Wall -Wextra -g -pthread -std=c++17
+CC = gcc
+CXX = g++
+CFLAGS = -I$(IDIR) -Wall -Wextra -g -pthread
+CXXFLAGS = -I$(IDIR) -Wall -Wextra -g -pthread -std=c++17
 ODIR = obj
 SDIR = src
 LDIR = lib
@@ -24,12 +26,12 @@ $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/%.o: $(TDIR)/%.cpp $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 all: $(APPBIN) $(TESTBIN) submission
 
 $(APPBIN): $(OBJ) $(MOBJ)
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+	$(CXX) -o $@ $^ $(CFLAGS) $(LIBS)
 
 $(TESTBIN): $(TOBJ) $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(XXLIBS)

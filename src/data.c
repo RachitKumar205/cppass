@@ -107,7 +107,7 @@ Data convert_int_to_data(int number, unsigned char base, unsigned char number_bi
     unsigned int uint_value;
     if (number < 0) {
         //uint_value = (1u << number_bits) + number;
-        uint_value = (unsigned int)(number & ((1u << number_bits) - 1))
+        uint_value = (unsigned int)(number & ((1u << number_bits) - 1));
     } else {
         uint_value = number;
     }
